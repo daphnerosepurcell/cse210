@@ -1,11 +1,9 @@
 using System;
 
-namespace game
+class Program
 {
-    class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
             Console.Write("What is your grade percentage? ");
 
             string input = Console.ReadLine();
@@ -44,4 +42,3 @@ namespace game
             }
         }
     }
-}
