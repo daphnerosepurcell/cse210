@@ -50,20 +50,8 @@ class Program
                 string saveFile = Console.ReadLine();
                 journal.SaveToFile(saveFile);
             }
+            
             else if (option == 5)
-            {
-                Console.Write("Enter entry number to remove: ");
-                int entryNumber;
-                if (int.TryParse(Console.ReadLine(), out entryNumber))
-                {
-                    journal.RemoveEntry(entryNumber);
-                }
-                else
-                {
-                    Console.WriteLine("Invalid entry number.");
-                }
-            }
-            else if (option == 6)
             {
                 done = true;
             }

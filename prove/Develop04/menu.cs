@@ -7,7 +7,6 @@ public class Menu
         Console.WriteLine("2. Display Entries");
         Console.WriteLine("3. Load Journal");
         Console.WriteLine("4. Save Journal");
-        Console.WriteLine("5. Remove Entry");
-        Console.WriteLine("6. Quit");
+        Console.WriteLine("5. Quit");
     }
 }
