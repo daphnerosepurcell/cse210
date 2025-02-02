@@ -24,6 +24,12 @@ public class Journal
 
     public void SaveToFile(string filename)
     {
+        if (entries.Count == 0)
+        {
+            Console.WriteLine("No entries to save.");
+            return;
+        }
+
         using (StreamWriter writer = new StreamWriter(filename))
         {
             foreach (var entry in entries)
@@ -31,6 +37,7 @@ public class Journal
                 writer.WriteLine($"{entry.Date}~|~{entry.Prompt}~|~{entry.Response}");
             }
         }
+
         Console.WriteLine($"Journal saved to {filename}");
     }
 
@@ -42,8 +49,14 @@ public class Journal
             return;
         }
 
-        entries.Clear();
         string[] lines = File.ReadAllLines(filename);
+        if (lines.Length == 0)
+        {
+            Console.WriteLine("File is empty.");
+            return;
+        }
+
+        entries.Clear();
         foreach (string line in lines)
         {
             string[] parts = line.Split("~|~");
@@ -51,7 +64,12 @@ public class Journal
             {
                 entries.Add(new Entry(parts[0], parts[1], parts[2]));
             }
+            else
+            {
+                Console.WriteLine("Warning: Skipping an improperly formatted entry.");
+            }
         }
+
         Console.WriteLine($"Journal loaded from {filename}");
     }
 }

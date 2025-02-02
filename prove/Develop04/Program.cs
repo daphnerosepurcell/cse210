@@ -1,6 +1,5 @@
 using System;
 using System.IO;
-using System.Text.Json;
 using System.Collections.Generic;
 
 class Program
@@ -50,9 +49,10 @@ class Program
                 string saveFile = Console.ReadLine();
                 journal.SaveToFile(saveFile);
             }
-            
             else if (option == 5)
             {
+                Console.Beep()
+                Console.WriteLine("Ending journal program.")
                 done = true;
             }
             else

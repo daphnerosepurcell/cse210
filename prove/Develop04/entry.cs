@@ -10,4 +10,16 @@ public class Entry
         Prompt = prompt;
         Response = response;
     }
+
+    public Entry(string date, string prompt, string response)
+    {
+        Date = date;
+        Prompt = prompt;
+        Response = response;
+    }
+
+    public override string ToString()
+    {
+        return $"{Date} | {Prompt} | {Response}";
+    }
 }
