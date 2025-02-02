@@ -1,3 +1,8 @@
+using System.Text.Json;
+using System.Collections.Generic;
+using System.IO;
+using System;
+
 public class Journal
 {
     private List<Entry> entries = new List<Entry>();
@@ -30,15 +35,9 @@ public class Journal
             return;
         }
 
-        using (StreamWriter writer = new StreamWriter(filename))
-        {
-            foreach (var entry in entries)
-            {
-                writer.WriteLine($"{entry.Date}~|~{entry.Prompt}~|~{entry.Response}");
-            }
-        }
-
-        Console.WriteLine($"Journal saved to {filename}");
+        string json = JsonSerializer.Serialize(entries, new JsonSerializerOptions { WriteIndented = true });
+        File.WriteAllText(filename, json);
+        Console.WriteLine($"Journal saved to {filename} (JSON format)");
     }
 
     public void LoadFromFile(string filename)
@@ -49,27 +48,14 @@ public class Journal
             return;
         }
 
-        string[] lines = File.ReadAllLines(filename);
-        if (lines.Length == 0)
+        string json = File.ReadAllText(filename);
+        if (string.IsNullOrWhiteSpace(json))
         {
             Console.WriteLine("File is empty.");
             return;
         }
 
-        entries.Clear();
-        foreach (string line in lines)
-        {
-            string[] parts = line.Split("~|~");
-            if (parts.Length == 3)
-            {
-                entries.Add(new Entry(parts[0], parts[1], parts[2]));
-            }
-            else
-            {
-                Console.WriteLine("Warning: Skipping an improperly formatted entry.");
-            }
-        }
-
-        Console.WriteLine($"Journal loaded from {filename}");
+        entries = JsonSerializer.Deserialize<List<Entry>>(json) ?? new List<Entry>();
+        Console.WriteLine($"Journal loaded from {filename} (JSON format)");
     }
 }

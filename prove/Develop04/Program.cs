@@ -1,5 +1,6 @@
 using System;
 using System.IO;
+using System.Text.Json;
 using System.Collections.Generic;
 
 class Program
@@ -39,7 +40,7 @@ class Program
             }
             else if (option == 3)
             {
-                Console.Write("Enter filename to load (e.g., journal.json): ");
+                Console.Write("Enter filename to load (ex: journal.json): ");
                 string loadFile = Console.ReadLine();
                 journal.LoadFromFile(loadFile);
             }
@@ -51,8 +52,8 @@ class Program
             }
             else if (option == 5)
             {
-                Console.Beep()
-                Console.WriteLine("Ending journal program.")
+                Console.Beep();
+                Console.WriteLine("Ending journal program.");
                 done = true;
             }
             else
