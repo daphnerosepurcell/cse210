@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-
+//Extra: I made it so the program takes the scripture from the CSV file
 class Program
 {
 static void Main()
