@@ -7,7 +7,9 @@ class Program
 {
 static void Main()
 {
-    string filePath = @"C:\Users\dapsa\OneDrive\Documents\C+Git CSE 210\cse210\prove\Develop03\DC111.csv";
+    string filePath = "";
+    //../
+    //relative path
     Console.WriteLine($"Looking for file at: {filePath}"); 
 
     List<Scripture> scriptures = LoadScriptures(filePath);

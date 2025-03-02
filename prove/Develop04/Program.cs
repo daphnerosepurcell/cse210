@@ -1,64 +1,49 @@
 using System;
-using System.IO;
-using System.Text.Json;
 using System.Collections.Generic;
 
-class Program
+namespace MindfulnessProgram
 {
-    static void Main(string[] args)
+    class Program
     {
-        Menu menu = new Menu();  
-        Journal journal = new Journal();
-        Prompt prompt = new Prompt();
-
-        bool done = false;
-
-        while (!done)
+        static void Main()
         {
-            menu.Display();  
-            Console.Write("\nEnter your choice: ");
-            string input = Console.ReadLine();
-            int option;
+            Dictionary<string, Activity> activities = new Dictionary<string, Activity>
+            {
+                { "1", new BreathingActivity() },
+                { "2", new ReflectionActivity() },
+                { "3", new ListingActivity() }
+            };
 
-            if (!int.TryParse(input, out option))
+            while (true)
             {
-                Console.WriteLine("Invalid input. Please enter a number.");
-                continue;
-            }
+                if (Console.IsOutputRedirected == false && Console.IsErrorRedirected == false)
+                {
+                    Console.Clear();
+                }
 
-            if (option == 1)
-            {
-                string selectedPrompt = prompt.GetRandom();
-                Console.WriteLine("\nToday's Prompt: " + selectedPrompt);
-                Console.Write("Your Response: ");
-                string response = Console.ReadLine();
-                journal.AddEntry(selectedPrompt, response);
-            }
-            else if (option == 2)
-            {
-                journal.DisplayEntries();
-            }
-            else if (option == 3)
-            {
-                Console.Write("Enter filename to load (ex: journal.json): ");
-                string loadFile = Console.ReadLine();
-                journal.LoadFromFile(loadFile);
-            }
-            else if (option == 4)
-            {
-                Console.Write("Enter filename to save (e.g., journal.json): ");
-                string saveFile = Console.ReadLine();
-                journal.SaveToFile(saveFile);
-            }
-            else if (option == 5)
-            {
-                Console.Beep();
-                Console.WriteLine("Ending journal program.");
-                done = true;
-            }
-            else
-            {
-                Console.WriteLine("Invalid choice. Please try again.");
+                Console.WriteLine("=== Mindfulness Program ===");
+                Console.WriteLine("1. Breathing Activity");
+                Console.WriteLine("2. Reflection Activity");
+                Console.WriteLine("3. Listing Activity");
+                Console.WriteLine("4. Exit");
+                Console.Write("Select an option: ");
+
+                string choice = Console.ReadLine();
+
+                if (choice == "4")
+                {
+                    Console.WriteLine("Goodbye! Stay mindful.");
+                    break;
+                }
+                else if (activities.ContainsKey(choice))
+                {
+                    activities[choice].Run();
+                }
+                else
+                {
+                    Console.WriteLine("Invalid choice. Please try again.");
+                    System.Threading.Thread.Sleep(1500);
+                }
             }
         }
     }
