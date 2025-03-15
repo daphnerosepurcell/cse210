@@ -1,8 +1,12 @@
 class SimpleGoal : Goal
 {
-    private bool _completed = false;
+    private bool _completed;
 
-    public SimpleGoal(string name, string desc, int points) : base(name, desc, points) { }
+    public SimpleGoal(string name, string desc, int points, bool completed = false) 
+        : base(name, desc, points)
+    {
+        _completed = completed;
+    }
 
     public override int RecordEvent()
     {
@@ -16,4 +20,7 @@ class SimpleGoal : Goal
     }
 
     public override bool IsComplete() => _completed;
+
+    public override string SaveString() =>
+        $"SimpleGoal|{_name}|{_desc}|{_points}|{_completed}";
 }

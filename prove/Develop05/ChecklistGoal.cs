@@ -1,25 +1,25 @@
 class ChecklistGoal : Goal
 {
-    private int _requiredTimes;
+    private int _required;
+    private int _completed;
     private int _bonus;
-    private int _timesCompleted;
 
-    public ChecklistGoal(string name, string desc, int points, int requiredTimes, int bonus)
+    public ChecklistGoal(string name, string desc, int points, int required, int bonus, int completed = 0)
         : base(name, desc, points)
     {
-        _requiredTimes = requiredTimes;
+        _required = required;
         _bonus = bonus;
-        _timesCompleted = 0;
+        _completed = completed;
     }
 
     public override int RecordEvent()
     {
-        if (_timesCompleted < _requiredTimes)
+        if (_completed < _required)
         {
-            _timesCompleted++;
-            if (_timesCompleted == _requiredTimes)
+            _completed++;
+            if (_completed == _required)
             {
-                Console.WriteLine("Checklist Goal completed!");
+                Console.WriteLine("Checklist goal complete! Bonus awarded.");
                 return _points + _bonus;
             }
             return _points;
@@ -28,10 +28,11 @@ class ChecklistGoal : Goal
         return 0;
     }
 
-    public override bool IsComplete() => _timesCompleted >= _requiredTimes;
+    public override bool IsComplete() => _completed >= _required;
 
-    public override string Display()
-    {
-        return $"{(IsComplete() ? "[X]" : "[ ]")} {_name}: {_desc} (Completed {_timesCompleted}/{_requiredTimes})";
-    }
+    public override string SaveString() =>
+        $"ChecklistGoal|{_name}|{_desc}|{_points}|{_required}|{_bonus}|{_completed}";
+
+    public override string Display() =>
+        $"[{(IsComplete() ? 'X' : ' ')}] {_name} ({_desc}) Completed: {_completed}/{_required}";
 }
