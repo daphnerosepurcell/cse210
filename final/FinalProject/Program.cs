@@ -1,9 +1,15 @@
 using System;
-
-class Program
+//not done
+namespace ChordFinder
 {
-    static void Main(string[] args)
+    public class Program
     {
-        Console.WriteLine("Hello FinalProject World!");
+        public static void Main(string[] args)
+        {
+            Console.WriteLine("Welcome to the chord finder!");
+            Console.WriteLine("Let's find that chord.");
+            Console.Write("Enter a root note (e.g., C, D#, A): ");
+
+        }
     }
 }
