@@ -4,7 +4,7 @@ namespace ChordFinder
 {
     public class Program
     {
-        public static void Main(string[] args)
+        public static void Main(string[] args)//c
         {
             Console.WriteLine("Welcome to the chord finder!");
             Console.WriteLine("Let's find that chord.");
