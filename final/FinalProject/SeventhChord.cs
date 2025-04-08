@@ -1,6 +1,6 @@
-  class MajorChord : Chord
+    class SeventhChord : Chord
     {
-        public MajorChord(string rootNote) : base(rootNote) { }
+        public SeventhChord(string rootNote) : base(rootNote) { }
 
         public override void Build()
         {
@@ -8,5 +8,6 @@
             notes.Add(root);
             notes.Add(Step(4));
             notes.Add(Step(7));
+            notes.Add(Step(10));
         }
     }

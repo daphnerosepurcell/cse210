@@ -1,12 +1,28 @@
-public abstract class Chord
-{
-    public string RootNote { get; protected set; }
-    public List<string> Notes { get; protected set; } = new List<string>();
-
-    public Chord(string rootNote)
+   abstract class Chord
     {
-        RootNote = rootNote;
-    }
+        protected string root;
+        protected List<string> notes = new List<string>();
 
-    public abstract void BuildChord();
-}
+        protected static List<string> scale = new List<string>()
+        {
+            "C", "C#", "D", "D#", "E", "F", "F#", "G", "G#", "A", "A#", "B"
+        };
+
+        public Chord(string rootNote)
+        {
+            root = rootNote;
+        }
+
+        protected string Step(int interval)
+        {
+            int i = scale.IndexOf(root);
+            return scale[(i + interval) % scale.Count];
+        }
+
+        public abstract void Build();
+
+        public List<string> GetNotes()
+        {
+            return notes;
+        }
+    }
