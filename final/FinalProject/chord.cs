@@ -1,4 +1,4 @@
-    abstract class Chord
+    abstract class Chord 
     {
         protected string _root;
         protected List<string> _notes = new List<string>();
