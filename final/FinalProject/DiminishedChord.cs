@@ -4,9 +4,9 @@
 
         public override void Build()
         {
-            notes.Clear();
-            notes.Add(root);
-            notes.Add(Step(3));
-            notes.Add(Step(6));
+            _notes.Clear();
+            _notes.Add(_root);
+            _notes.Add(Step(3));
+            _notes.Add(Step(6));
         }
     }
